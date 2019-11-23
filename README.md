@@ -1,3 +1,3 @@
 # sun-ivy
 
-Procedural Grid Generator
+Grid Generator
