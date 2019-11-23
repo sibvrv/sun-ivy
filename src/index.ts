@@ -104,7 +104,7 @@ export class ProceduralGrid {
     const {realHeight, realWidth} = this;
 
     let startIndex = 2;
-    let main = {
+    const main = {
       sector: 0,
       total: 0
     };
@@ -129,7 +129,7 @@ export class ProceduralGrid {
   extract(sector: number) {
     const {realHeight, realWidth} = this;
 
-    let result = [];
+    const result = [];
 
     for (let y = realHeight; --y >= 0;) {
       for (let x = realWidth; --x >= 0;) {
