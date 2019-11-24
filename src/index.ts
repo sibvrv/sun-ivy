@@ -17,26 +17,20 @@ export class ProceduralGrid {
     return Math.floor(Math.random() * max);
   }
 
+  getValue(x: number, y: number) {
+    return (x >= 0 && x < this.width && y >= 0 && y < this.height) ? this.grid[y * this.width + x] : 1;
+  }
+
   getWalls(x: number, y: number) {
     const walls: number[] = [];
 
-    let px, py;
+    const px = x * 2;
+    const py = y * 2;
 
-    px = x * 2 - 1;
-    py = y * 2;
-    walls[0] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
-
-    px = x * 2 + 1;
-    py = y * 2;
-    walls[1] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
-
-    px = x * 2;
-    py = y * 2 - 1;
-    walls[2] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
-
-    px = x * 2;
-    py = y * 2 + 1;
-    walls[3] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
+    walls[0] = this.getValue(px - 1, py);
+    walls[1] = this.getValue(px + 1, py);
+    walls[2] = this.getValue(px, py - 1);
+    walls[3] = this.getValue(px, py + 1);
 
     return walls.map(wall => wall - 1);
   }
@@ -75,7 +69,7 @@ export class ProceduralGrid {
 
     const index = pos_y * this.width + pos_x;
 
-    if (grid[index] === color || grid[index]) {
+    if (grid[index]) {
       return 0;
     }
 

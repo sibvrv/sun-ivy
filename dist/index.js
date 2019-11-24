@@ -14,21 +14,17 @@ var ProceduralGrid = /** @class */ (function () {
     ProceduralGrid.prototype.random = function (max) {
         return Math.floor(Math.random() * max);
     };
+    ProceduralGrid.prototype.getValue = function (x, y) {
+        return (x >= 0 && x < this.width && y >= 0 && y < this.height) ? this.grid[y * this.width + x] : 1;
+    };
     ProceduralGrid.prototype.getWalls = function (x, y) {
         var walls = [];
-        var px, py;
-        px = x * 2 - 1;
-        py = y * 2;
-        walls[0] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
-        px = x * 2 + 1;
-        py = y * 2;
-        walls[1] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
-        px = x * 2;
-        py = y * 2 - 1;
-        walls[2] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
-        px = x * 2;
-        py = y * 2 + 1;
-        walls[3] = (px >= 0 && px < this.width && py >= 0 && py < this.height) ? this.grid[py * this.width + px] : 1;
+        var px = x * 2;
+        var py = y * 2;
+        walls[0] = this.getValue(px - 1, py);
+        walls[1] = this.getValue(px + 1, py);
+        walls[2] = this.getValue(px, py - 1);
+        walls[3] = this.getValue(px, py + 1);
         return walls.map(function (wall) { return wall - 1; });
     };
     ProceduralGrid.prototype.drawBlock = function (x, y) {
@@ -59,7 +55,7 @@ var ProceduralGrid = /** @class */ (function () {
             return 0;
         }
         var index = pos_y * this.width + pos_x;
-        if (grid[index] === color || grid[index]) {
+        if (grid[index]) {
             return 0;
         }
         grid[index] = color;

@@ -9,6 +9,7 @@ export declare class ProceduralGrid {
     height: number;
     constructor(realWidth: number, realHeight: number);
     random(max: number): number;
+    getValue(x: number, y: number): number;
     getWalls(x: number, y: number): number[];
     drawBlock(x: number, y: number): void;
     makeBlocks(total: number): void;
