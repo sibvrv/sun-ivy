@@ -4,15 +4,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Procedural Grid
  */
 var ProceduralGrid = /** @class */ (function () {
-    function ProceduralGrid(realWidth, realHeight) {
+    function ProceduralGrid(realWidth, realHeight, randomFunc) {
+        if (randomFunc === void 0) { randomFunc = function () { return Math.random(); }; }
         this.realWidth = realWidth;
         this.realHeight = realHeight;
+        this.randomFunc = randomFunc;
         this.height = realWidth * 2 - 1;
         this.width = realHeight * 2 - 1;
         this.grid = new Uint8Array(this.width * this.height);
     }
     ProceduralGrid.prototype.random = function (max) {
-        return Math.floor(Math.random() * max);
+        return Math.floor(this.randomFunc() * max);
     };
     ProceduralGrid.prototype.getValue = function (x, y) {
         return (x >= 0 && x < this.width && y >= 0 && y < this.height) ? this.grid[y * this.width + x] : 1;
@@ -110,25 +112,6 @@ var ProceduralGrid = /** @class */ (function () {
         }
         return result.reverse();
     };
-    ProceduralGrid.prototype.dump = function () {
-        var _a = this, width = _a.width, height = _a.height;
-        for (var y = 0; y < height; y++) {
-            var line = [];
-            for (var x = 0; x < width; x++) {
-                line.push(this.grid[y * this.width + x]);
-            }
-            console.log(line);
-        }
-    };
     return ProceduralGrid;
 }());
 exports.ProceduralGrid = ProceduralGrid;
-function proceduralGrid(width, height) {
-    var world = new ProceduralGrid(width, height);
-    world.makeWalls();
-    world.makeBlocks(2);
-    var main = world.fillSectors();
-    world.wallsBetweenSectors();
-    return world.extract(main);
-}
-exports.proceduralGrid = proceduralGrid;

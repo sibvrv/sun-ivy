@@ -1,13 +1,15 @@
+declare type TRandomFunc = () => number;
 /**
  * Procedural Grid
  */
 export declare class ProceduralGrid {
     realWidth: number;
     realHeight: number;
+    randomFunc: TRandomFunc;
     grid: Uint8Array;
     width: number;
     height: number;
-    constructor(realWidth: number, realHeight: number);
+    constructor(realWidth: number, realHeight: number, randomFunc?: TRandomFunc);
     random(max: number): number;
     getValue(x: number, y: number): number;
     getWalls(x: number, y: number): number[];
@@ -22,10 +24,5 @@ export declare class ProceduralGrid {
         y: number;
         walls: number[];
     }[];
-    dump(): void;
 }
-export declare function proceduralGrid(width: number, height: number): {
-    x: number;
-    y: number;
-    walls: number[];
-}[];
+export {};

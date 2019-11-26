@@ -1,3 +1,5 @@
+type TRandomFunc = () => number;
+
 /**
  * Procedural Grid
  */
@@ -6,7 +8,7 @@ export class ProceduralGrid {
   width: number;
   height: number;
 
-  constructor(public realWidth: number, public realHeight: number) {
+  constructor(public realWidth: number, public realHeight: number, public randomFunc: TRandomFunc = () => Math.random()) {
     this.height = realWidth * 2 - 1;
     this.width = realHeight * 2 - 1;
 
@@ -14,7 +16,7 @@ export class ProceduralGrid {
   }
 
   random(max: number) {
-    return Math.floor(Math.random() * max);
+    return Math.floor(this.randomFunc() * max);
   }
 
   getValue(x: number, y: number) {
@@ -137,25 +139,4 @@ export class ProceduralGrid {
     }
     return result.reverse();
   }
-
-  dump() {
-    const {width, height} = this;
-
-    for (let y = 0; y < height; y++) {
-      const line = [];
-      for (let x = 0; x < width; x++) {
-        line.push(this.grid[y * this.width + x]);
-      }
-      console.log(line);
-    }
-  }
-}
-
-export function proceduralGrid(width: number, height: number) {
-  const world = new ProceduralGrid(width, height);
-  world.makeWalls();
-  world.makeBlocks(2);
-  const main = world.fillSectors();
-  world.wallsBetweenSectors();
-  return world.extract(main);
 }
