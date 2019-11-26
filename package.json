@@ -1,6 +1,6 @@
 {
   "name": "sun-ivy",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Procedural Grid Generator written in TypeScript.",
   "author": "Roman Vereshchagin",
   "license": "GPL-3.0",
