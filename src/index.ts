@@ -65,7 +65,7 @@ export class ProceduralGrid {
   fill(pos_x: number, pos_y: number, color: number) {
     const {grid} = this;
 
-    if (pos_x < 0 || pos_y < 0 || pos_x >= this.width || pos_y >= this.height) {
+    if (pos_x < 0 || pos_y < 0 || pos_x >= this.width || pos_y >= this.height || (pos_x % 2 === 1 && pos_y % 2 === 1)) {
       return 0;
     }
 
