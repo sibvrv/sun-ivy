@@ -53,7 +53,7 @@ var ProceduralGrid = /** @class */ (function () {
     };
     ProceduralGrid.prototype.fill = function (pos_x, pos_y, color) {
         var grid = this.grid;
-        if (pos_x < 0 || pos_y < 0 || pos_x >= this.width || pos_y >= this.height) {
+        if (pos_x < 0 || pos_y < 0 || pos_x >= this.width || pos_y >= this.height || (pos_x % 2 === 1 && pos_y % 2 === 1)) {
             return 0;
         }
         var index = pos_y * this.width + pos_x;
